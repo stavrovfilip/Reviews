@@ -22,21 +22,21 @@ public class ReviewsController {
     }
 
     @GetMapping()
-    public String getReviews(){
+    public String getFilter(){
         return "filter";
     }
 
     @PostMapping("reviews")
     public String getReviews(@RequestParam String orderRating, @RequestParam int rating,
                                      @RequestParam String orderDate, @RequestParam String text, Model model){
+
         if(orderRating.length()==0 && orderDate.length()==0 && text.length()==0 && rating>5){
             return "filter";
         }
+
         List<Review> reviews = this.reviewsService.filter(orderRating, rating, orderDate, text);
         model.addAttribute("reviews", reviews);
-
             return "reviews";
         }
-
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReviewsService {
 
-    List<Review> findAll();
+    //List<Review> findAll();
 
     List<Review> filter(String orderRating, int rating, String orderDate, String text);
 }

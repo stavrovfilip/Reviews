@@ -542,7 +542,8 @@ public class DataHolder {
 
         ObjectMapper mapper = new ObjectMapper();
         reviewlist = mapper.readValue(jsonString, new TypeReference<List<Review>>(){});
-        System.out.println(reviewlist.size());
+        //System.out.println(reviewlist.size());
+
         }
 }
 

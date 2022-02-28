@@ -18,10 +18,10 @@ public class ReviewsServiceImpl implements ReviewsService {
     }
 
 
-    @Override
+   /* @Override
     public List<Review> findAll() {
         return this.reviewsRepository.findAll();
-    }
+    }*/
 
     @Override
     public List<Review> filter(String orderRating, int rating, String orderDate, String text) {

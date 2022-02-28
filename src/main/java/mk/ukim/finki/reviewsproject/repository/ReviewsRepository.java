@@ -11,19 +11,19 @@ import java.util.stream.Collectors;
 @Repository
 public class ReviewsRepository {
 
-    public List<Review> findAll() {
+    /*public List<Review> findAll() {
         return DataHolder.reviewlist;
-    }
+    }*/
 
     public List<Review> filter(String orderRating, int rating, String orderDate, String text) {
         List<Review> reviews = DataHolder.reviewlist.stream().filter(r -> r.getRating() >= rating).collect(Collectors.toList());
 
-        //Compare by first name and then last name
+        //See if reviewText matters
         if (text.equals("yes")) {
             if (orderRating.equals("lowest") && orderDate.equals("oldest")) {
+                //First the reviews that have reviewText, from lowest rating to highest, and from oldest to newest according to date
                 List<Review> reviews1 = reviews.stream().filter(r -> r.getReviewText().equals("")).collect(Collectors.toList());
                 List<Review> reviews2 = reviews.stream().filter(r -> !r.getReviewText().equals("")).collect(Collectors.toList());
-                //First the reviews that have reviewText, from lowest rating to highest, and from oldest to newest according to date
                 Comparator<Review> orderByAllThree = Comparator.comparing(Review::getReviewText)
                         .thenComparing(Review::getRating)
                         .thenComparing(Review::getReviewCreatedOnDate);
@@ -55,8 +55,8 @@ public class ReviewsRepository {
                         .thenComparing(Review::getReviewCreatedOnDate).reversed();
                 return reviews.stream().sorted(orderByAllThree).collect(Collectors.toList());
             }
-
-        } else {
+        }
+        else {
             if (orderRating.equals("lowest") && orderDate.equals("oldest")){
                 //Doesn't matter if reviews have reviewText or not; from lowest to highest rating and then from oldest to newest
                 Comparator<Review> orderByRatingAndDate = Comparator.comparing(Review::getRating)
@@ -80,9 +80,7 @@ public class ReviewsRepository {
                         .thenComparing(Review::getReviewCreatedOnDate).reversed();
                 return reviews.stream().sorted(orderByRatingAndDate).collect(Collectors.toList());
             }
-
         }
-
     }
 
 }
